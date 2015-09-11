@@ -5,6 +5,9 @@
  */
 require_once dirname(__FILE__).'/../mod-simpleuser/init.php';
 
+define('SIMPLE_CMS_UI', dirname(__FILE__).'/ui/');
+define('SIMPLE_CMS_CONFIG', dirname(__FILE__).'/config/');
+
 DAutoloader::getInstance()->addAutoloadPathArray(
     array(
         dirname(__FILE__).'/',
@@ -13,3 +16,5 @@ DAutoloader::getInstance()->addAutoloadPathArray(
         dirname(__FILE__).'/model/',
     )
 );
+
+Config::loadConfig(SIMPLE_CMS_CONFIG.'route');
