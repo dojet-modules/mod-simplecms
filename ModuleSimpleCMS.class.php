@@ -5,6 +5,12 @@
  * @author liyan
  * @since 2015 9 10
  */
+namespace Mod\SimpleCMS;
+
+use \BEGLOBAL\BaseModule;
+use \BEGLOBAL\IDatabaseModule;
+use \Mod\SimpleUser\ModuleSimpleUser;
+
 class ModuleSimpleCMS extends BaseModule
 implements IDatabaseModule {
 
