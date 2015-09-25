@@ -1,6 +1,12 @@
 <?php
 /**
  *  简单的CMS
+ *  你需要：
+ *  - 配置nginx
+ *      location /static/mod/simplecms {
+ *          alias .../mod-simplecms/static/
+ *      }
+ *
  *  dependencies: ModuleSimpleUser
  */
 namespace Mod\SimpleCMS;
@@ -11,6 +17,7 @@ use \Config;
 require_once dirname(__FILE__).'/../mod-simpleuser/init.php';
 
 define('SIMPLE_CMS_UI', dirname(__FILE__).'/ui/');
+define('SIMPLE_CMS_TEMPLATE', dirname(__FILE__).'/template/');
 define('SIMPLE_CMS_CONFIG', dirname(__FILE__).'/config/');
 
 DAutoloader::getInstance()->addNamespacePathArray(__NAMESPACE__,

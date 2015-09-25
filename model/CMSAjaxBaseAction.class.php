@@ -7,6 +7,8 @@
  * @author liyan
  * @since 2014 12 18
  */
+namespace Mod\SimpleCMS;
+
 abstract class CMSAjaxBaseAction extends CMSBaseAction {
 
     final protected function cmsAction(MCMSUser $user) {

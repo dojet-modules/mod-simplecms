@@ -1,0 +1,7 @@
+#main h1 {}
+#content {}
+.area{margin-bottom: 13px;}
+.search{border-bottom: 1px solid #eee; padding-bottom:20px;}
+.search span{margin-right:10px;}
+table.detail th{width:10%;line-height:30px;padding-left:10px; border-bottom:1px solid #EDEDED;}
+table.detail td{width:90%;padding:10px 0 10px 0;border-bottom:1px solid #EDEDED;}

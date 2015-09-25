@@ -7,6 +7,11 @@
  * @author liyan
  * @since 2014 12 18
  */
+namespace Mod\SimpleCMS;
+
+use \Mod\SimpleUser\MSimpleUser;
+use \Config;
+
 abstract class CMSPageBaseAction extends CMSBaseAction {
     const FAILED = 'failed';
     const SUCCESS = 'success';
@@ -20,15 +25,15 @@ abstract class CMSPageBaseAction extends CMSBaseAction {
     protected $pageNo = 0;
     protected $search = array();
 
-    abstract protected function cmsPageAction(MCMSUser $user);
+    abstract protected function cmsPageAction(MSimpleUser $user);
     abstract protected function topMenuKey();
 
-    final protected function cmsAction(MCMSUser $user) {
+    final protected function cmsAction(MSimpleUser $user) {
         $this->cmsPageAction($user);
         $this->displayPage($user);
     }
 
-    private function displayPage(MCMSUser $user) {
+    private function displayPage(MSimpleUser $user) {
         $menuConf = Config::configForKeyPath('menu');
         $this->assign('top_menu', $menuConf);
 
@@ -43,79 +48,16 @@ abstract class CMSPageBaseAction extends CMSBaseAction {
         $this->assign('page', $this->page);
 
         $this->assign('fullname', $user->getFullname());
-        $this->assign('userid', $user->getUid());
+        $this->assign('userid', $user->uid());
         $this->assign('permissions', $user->getPermissions());
 
         $this->displayTemplate('framework.tpl.php');
     }
 
-    protected function initPage($obj, $rawconds=array(), $count=false){
-        if(empty($rawconds)){
-            $rawconds = $this->search;
-        }
-        $pageNo = MRequest::get('pageNo');
-        $this->pageNo = isset($pageNo) ? $pageNo : 1;
-        $pageSize = MRequest::get('size');
-        $this->pageSize = $pageSize ? $pageSize : self::DEFAULT_PAGESIZE;
-
-        if($count === false){
-            $this->count = $obj::getcount($rawconds);
-        }
-        else{
-            $this->count = $count;
-        }
-        $pageObj = new Pagination($this->count);
-        $pageObj->setPageSize($this->pageSize);
-        $pageObj->setCurrent($this->pageNo);
-        $pageObj->makePages();
-        $this->assign('pagination', $pageObj);
-    }
-
-    //获取Dal类中的数据
-    protected function getList($obj, $rawconds=array(), $orderBy = array()){
-        if(new $obj instanceof BaseDalX){
-            if(empty($rawconds)){
-                $rawconds = $this->search;
-            }
-            $orderBy = isset($obj::$defaultOrderby) && !empty($obj::$defaultOrderby) ? $obj::$defaultOrderby : $orderBy;
-            return $obj::getList($rawconds, $this->pageNo, $this->pageSize, $this->count, $orderBy);
-        }
-        else{
-            return false;
-        }
-    }
-
-    protected function checkParams(){
-        foreach($this->params as $value){
-            if(!isset($value)){
-                return false;
-            }
-            else{
-                if(!is_numeric($value) && $value == ''){
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    protected function trimParams(&$params){
-        foreach($params as &$param){
-            $param = trim($param);    
-        }
-    }
-
-    protected function permissionDenied(MCMSUser $user) {
+    protected function permissionDenied(MSimpleUser $user) {
         $this->page = 'permissiondeny.tpl.php';
         $this->displayPage($user);
     }
-
-    // protected function displayResultBox($title, $content, $link) {
-    //     $this->assign('title', $title);
-    //     $this->assign('content', $content);
-    //     $this->assign('link', $link);
-    //     $this->displayTemplate('result.tpl.php');
-    // }
 
     protected function displayResultBox($title, $content, $link) {
         $this->assign('title', $title);

@@ -10,11 +10,20 @@
 namespace Mod\SimpleCMS;
 
 use \BaseAction;
+use \Mod\SimpleUser\MSimpleUser;
 
-class HomeAction extends BaseAction {
+class HomeAction extends CMSPageBaseAction {
 
-    public function execute() {
-        print 'simple cms';
+    protected function cmsPageAction(MSimpleUser $user) {
+
     }
+
+    protected function topMenuKey() {
+
+    }
+
+    // public function execute() {
+    //     print 'simple cms';
+    // }
 
 }

@@ -8,6 +8,11 @@
  * @author liyan
  * @since 2015 7 21
  */
+namespace Mod\SimpleCMS;
+
+use \BaseModuleDal;
+use \DAssert;
+
 class DalSimpleCMSUserRole extends BaseModuleDal {
 
     static function module() {
