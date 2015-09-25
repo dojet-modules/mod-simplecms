@@ -7,8 +7,8 @@
  */
 namespace Mod\SimpleCMS;
 
-use \BEGLOBAL\BaseModule;
-use \BEGLOBAL\IDatabaseModule;
+use \BaseModule;
+use \IDatabaseModule;
 use \Mod\SimpleUser\ModuleSimpleUser;
 
 class ModuleSimpleCMS extends BaseModule
