@@ -7,6 +7,8 @@
  * @author liyan
  * @since 2014 12 17
  */
+namespace Mod\SimpleCMS;
+
 abstract class CMSBaseAction extends XBaseAction {
 
     final public function execute() {

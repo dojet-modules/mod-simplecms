@@ -5,8 +5,8 @@
  */
 namespace Mod\SimpleCMS;
 
-use \Dojet\DAutoloader;
-use \Dojet\Config;
+use \DAutoloader;
+use \Config;
 
 require_once dirname(__FILE__).'/../mod-simpleuser/init.php';
 

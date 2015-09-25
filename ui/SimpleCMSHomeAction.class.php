@@ -9,7 +9,7 @@
  */
 namespace Mod\SimpleCMS;
 
-use \Dojet\BaseAction;
+use \BaseAction;
 
 class SimpleCMSHomeAction extends BaseAction {
 
