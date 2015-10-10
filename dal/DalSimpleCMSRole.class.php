@@ -39,4 +39,5 @@ class DalSimpleCMSRole extends BaseModuleDal {
         return self::rs2array($sql);
     }
 
+
 }

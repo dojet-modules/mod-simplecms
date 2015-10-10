@@ -39,7 +39,8 @@ class DalSimpleCMSUserRole extends BaseModuleDal {
         $tableName = static::tableName();
         DAssert::assertNumeric($uid);
         $sql = "SELECT rid
-                FROM `$tableName`";
+                FROM `$tableName`
+                WHERE uid=$uid";
         return self::rs2firstvalue($sql);
     }
 

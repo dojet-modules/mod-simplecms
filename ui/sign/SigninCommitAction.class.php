@@ -25,8 +25,6 @@ class SigninCommitAction extends XBaseAction {
 
         LibSimpleUser::persistentAuth($username, $md5password);
 
-        // MLog::writeQuery(LOG_MOD_SIGN, '登入');
-
         $redirect = MCookie::getCookie('signin_redirect');
         MCookie::removeCookie('signin_redirect');
         if (!$redirect) {

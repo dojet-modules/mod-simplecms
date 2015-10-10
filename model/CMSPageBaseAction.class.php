@@ -9,31 +9,22 @@
  */
 namespace Mod\SimpleCMS;
 
-use \Mod\SimpleUser\MSimpleUser;
 use \Config;
 
 abstract class CMSPageBaseAction extends CMSBaseAction {
-    const FAILED = 'failed';
-    const SUCCESS = 'success';
-    const DEFAULT_PAGESIZE = 10;
 
-    protected $page;
     protected $title;
-    protected $params = array();
-    protected $count = 9999;
-    protected $pageSize = 9999;
-    protected $pageNo = 0;
-    protected $search = array();
+    protected $page;
 
-    abstract protected function cmsPageAction(MSimpleUser $user);
+    abstract protected function cmsPageAction(MCMSUser $user);
     abstract protected function topMenuKey();
 
-    final protected function cmsAction(MSimpleUser $user) {
+    final protected function cmsAction(MCMSUser $user) {
         $this->cmsPageAction($user);
         $this->displayPage($user);
     }
 
-    private function displayPage(MSimpleUser $user) {
+    private function displayPage(MCMSUser $user) {
         $menuConf = Config::configForKeyPath('menu');
         $this->assign('top_menu', $menuConf);
 
@@ -49,22 +40,18 @@ abstract class CMSPageBaseAction extends CMSBaseAction {
 
         $this->assign('fullname', $user->getFullname());
         $this->assign('userid', $user->uid());
-        $this->assign('permissions', $user->getPermissions());
+        // $this->assign('permissions', $user->getPermissions());
 
         $this->displayTemplate('framework.tpl.php');
     }
 
-    protected function permissionDenied(MSimpleUser $user) {
+    protected function permissionDenied(MCMSUser $user) {
         $this->page = 'permissiondeny.tpl.php';
         $this->displayPage($user);
     }
 
-    protected function displayResultBox($title, $content, $link) {
-        $this->assign('title', $title);
-        $this->assign('content', $content);
-        $this->assign('link', $link);
-        $this->page = 'misc/result.tpl.php';
-        $this->title = $title;
+    protected function templatePrefix($template) {
+        return SIMPLE_CMS_TEMPLATE;
     }
 
 }

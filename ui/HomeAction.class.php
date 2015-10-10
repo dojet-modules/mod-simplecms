@@ -9,21 +9,14 @@
  */
 namespace Mod\SimpleCMS;
 
-use \BaseAction;
-use \Mod\SimpleUser\MSimpleUser;
-
 class HomeAction extends CMSPageBaseAction {
 
-    protected function cmsPageAction(MSimpleUser $user) {
+    protected function cmsPageAction(MCMSUser $user) {
 
     }
 
     protected function topMenuKey() {
 
     }
-
-    // public function execute() {
-    //     print 'simple cms';
-    // }
 
 }

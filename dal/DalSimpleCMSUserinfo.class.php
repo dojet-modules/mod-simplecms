@@ -36,4 +36,13 @@ class DalSimpleCMSUserinfo extends BaseModuleDal {
         return self::doCreateTable($sql);
     }
 
+    public static function getUserinfo($uid) {
+        DAssert::assertNumeric($uid);
+        $tableName = self::tableName();
+        $sql = "SELECT *
+                FROM $tableName
+                WHERE uid=$uid";
+        return self::rs2rowline($sql);
+    }
+
 }

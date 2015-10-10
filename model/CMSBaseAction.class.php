@@ -21,17 +21,16 @@ abstract class CMSBaseAction extends XBaseAction {
         if ($this->shouldSignin()) {
             //  check signin
             try {
-                $user = $this->getSigninUserinfo();
-                DAssert::assert($user instanceof MSimpleUser, 'illegal user, must be MSimpleUser');
-            } catch (Exception $e) {
+                $user = $this->getCMSUser();
+                // var_dump($user);
+                DAssert::assert($user instanceof \Mod\SimpleCMS\MCMSUser, 'illegal user, must be MCMSUser');
+            } catch (\Exception $e) {
                 $this->notSignin();
                 return;
             }
         }
 
-        $uid = $user->uid();
-        $userRoleID = DalSimpleCMSUserRole::getUserRoleID($uid);
-        if (!$this->checkPermission($userRoleID)) {
+        if (!$this->checkPermission($user)) {
             $this->permissionDenied($user);
             return;
         }
@@ -43,18 +42,13 @@ abstract class CMSBaseAction extends XBaseAction {
         return true;
     }
 
-    private function getSigninUserinfo() {
-        $auth = LibSimpleUser::resolvePersistentAuth();
-        if (!$auth) {
-            throw new \Exception("not signin", 1);
-        }
-        list($username, $md5password) = $auth;
-        LibSimpleUser::persistentAuth($username, $md5password);
-
-        return MSimpleUser::userFromUsernamePassword($username, $md5password);
+    private function getCMSUser() {
+        $simpleUser = MSimpleUser::getSigninUser();
+        return MCMSUser::userFromSimpleUser($simpleUser);
     }
 
-    private function checkPermission($roleId) {
+    private function checkPermission(MCMSUser $user) {
+        $roleId = $user->roleID();
         $arrPagePms = $this->pagePermissions();
         if (empty($arrPagePms)) {
             //  if empty, allow all access
@@ -75,14 +69,14 @@ abstract class CMSBaseAction extends XBaseAction {
         return array();
     }
 
-    abstract protected function cmsAction(MSimpleUser $user);
+    abstract protected function cmsAction(MCMSUser $user);
 
     protected function notSignin() {
-        MCookie::setCookie('signin_redirect', $_SERVER['REQUEST_URI'], null, '/');
-        redirect(urlprefix('/signin'));
+        \MCookie::setCookie('signin_redirect', $_SERVER['REQUEST_URI'], null, '/');
+        redirect('/signin');
     }
 
-    protected function permissionDenied(MSimpleUser $user) {
+    protected function permissionDenied(MCMSUser $user) {
         die('permission deny!');
     }
 

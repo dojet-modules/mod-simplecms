@@ -3,13 +3,13 @@
   <head>
     <meta charset="utf-8">
     <title><?=safeHtml($tpl_title)?></title>
-    <link href="<?php echo urlprefix('/static/main.css')?>" rel="stylesheet">
-    <link href="<?php echo urlprefix('/static/bootstrap/css/bootstrap.css')?>" rel="stylesheet">
-    <link href="<?php echo urlprefix('/static/jquery-ui-1.11.0/jquery-ui.min.css')?>" rel="stylesheet">
-    <script src="<?php echo urlprefix('/static/jquery-1.11.1.min.js')?>"></script>
-    <script src="<?php echo urlprefix('/static/jquery-ui-1.11.0/jquery-ui.min.js')?>"></script>
-    <script src="<?php echo urlprefix('/static/bootstrap/js/bootstrap.min.js')?>"></script>
-    <script src="<?php echo urlprefix('/static/jquery.datepick-zh-CN.js')?>"></script>
+    <link href="<?php echo ('/static/mod/simplecms/main.css')?>" rel="stylesheet">
+    <link href="<?php echo ('/static/mod/simplecms/bootstrap/css/bootstrap.css')?>" rel="stylesheet">
+    <link href="<?php echo ('/static/mod/simplecms/jquery-ui-1.11.0/jquery-ui.min.css')?>" rel="stylesheet">
+    <script src="<?php echo ('/static/mod/simplecms/jquery-1.11.1.min.js')?>"></script>
+    <script src="<?php echo ('/static/mod/simplecms/jquery-ui-1.11.0/jquery-ui.min.js')?>"></script>
+    <script src="<?php echo ('/static/mod/simplecms/bootstrap/js/bootstrap.min.js')?>"></script>
+    <script src="<?php echo ('/static/mod/simplecms/jquery.datepick-zh-CN.js')?>"></script>
     <style type="text/css">
       body {
         padding-top: 60px;
@@ -32,11 +32,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <span class="navbar-brand">神奇工场CMS</span>
+          <span class="navbar-brand">CMS</span>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <p class="navbar-text pull-right">
-            Logged in as <a href="<?=urlprefix('/user/edit?uid='.$tpl_userid)?>"><?=safeHtml($tpl_fullname)?></a>, <a href="<?php echo urlprefix('/signout')?>" class="navbar-link">Signout</a>
+            Logged in as <a href="<?='/user/edit?uid='.$tpl_userid?>"><?=safeHtml($tpl_fullname)?></a>, <a href="/signout" class="navbar-link">Signout</a>
           </p>
           <ul class="nav navbar-nav">
           <? foreach ($tpl_top_menu as $key => $topMenu) : ?>
@@ -76,7 +76,7 @@
             <div class="container-fluid">
               <div class="row">
                 <div class="col-xs-12">
-<? include(TEMPLATE.$tpl_page); ?>
+<? include($tpl_page); ?>
                 </div>
               </div>
             </div>
