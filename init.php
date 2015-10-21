@@ -1,14 +1,4 @@
 <?php
-/**
- *  简单的CMS
- *  你需要：
- *  - 配置nginx
- *      location /static/mod/simplecms {
- *          alias .../mod-simplecms/static/
- *      }
- *
- *  dependencies: ModuleSimpleUser
- */
 namespace Mod\SimpleCMS;
 
 use \DAutoloader;
