@@ -12,7 +12,7 @@ namespace Mod\SimpleCMS;
 class HomeAction extends CMSPageBaseAction {
 
     protected function cmsPageAction(MCMSUser $user) {
-
+        $this->page = 'home/welcome.tpl.php';
     }
 
     protected function topMenuKey() {
