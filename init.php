@@ -20,3 +20,7 @@ DAutoloader::getInstance()->addNamespacePathArray(__NAMESPACE__,
 );
 
 Config::loadConfig(SIMPLE_CMS_CONFIG.'route');
+Config::loadConfig(SIMPLE_CMS_CONFIG.'permissions');
+
+// $menuAdmin = MMenu::menu('管理员管理', '/admin', array())
+// MMenu::root()->addSubmenu()

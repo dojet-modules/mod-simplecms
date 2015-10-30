@@ -10,6 +10,7 @@ use Mod\SimpleUser\MSimpleUser;
 class MCMSUser {
 
     protected $simpleUser;
+    protected static $me;
 
     private $userinfo;
     private $roleID;
@@ -24,6 +25,18 @@ class MCMSUser {
 
     public function uid() {
         return $this->simpleUser->uid();
+    }
+
+    public static function me() {
+        if (!self::$me) {
+            $simpleUser = MSimpleUser::getSigninUser();
+            self::$me = MCMSUser::userFromSimpleUser($simpleUser);
+        }
+        return self::$me;
+    }
+
+    public static function getSigninUser() {
+        return self::me();
     }
 
     protected function getUserinfo() {
@@ -45,7 +58,7 @@ class MCMSUser {
         return $userinfo['fullname'];
     }
 
-    public static function signout() {
+    public function signout() {
         $this->simpleUser->signout();
     }
 

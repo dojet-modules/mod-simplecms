@@ -11,8 +11,6 @@ namespace Mod\SimpleCMS;
 
 use \XBaseAction;
 use \DAssert;
-use \Mod\SimpleUser\LibSimpleUser;
-use \Mod\SimpleUser\MSimpleUser;
 
 abstract class CMSBaseAction extends XBaseAction {
 
@@ -21,8 +19,7 @@ abstract class CMSBaseAction extends XBaseAction {
         if ($this->shouldSignin()) {
             //  check signin
             try {
-                $user = $this->getCMSUser();
-                // var_dump($user);
+                $user = MCMSUser::getSigninUser();
                 DAssert::assert($user instanceof \Mod\SimpleCMS\MCMSUser, 'illegal user, must be MCMSUser');
             } catch (\Exception $e) {
                 $this->notSignin();
@@ -40,11 +37,6 @@ abstract class CMSBaseAction extends XBaseAction {
 
     protected function shouldSignin() {
         return true;
-    }
-
-    private function getCMSUser() {
-        $simpleUser = MSimpleUser::getSigninUser();
-        return MCMSUser::userFromSimpleUser($simpleUser);
     }
 
     private function checkPermission(MCMSUser $user) {
