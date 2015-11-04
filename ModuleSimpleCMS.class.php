@@ -25,6 +25,10 @@ implements IDatabaseModule {
         return $this->database;
     }
 
+    protected function depends() {
+        return array('mod-simpleuser');
+    }
+
     public function setDatabase($database) {
         $this->database = $database;
         ModuleSimpleUser::module()->setDatabase($database);
