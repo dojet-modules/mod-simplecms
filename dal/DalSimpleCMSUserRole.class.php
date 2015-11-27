@@ -23,7 +23,7 @@ class DalSimpleCMSUserRole extends BaseModuleDal {
         return static::module()->tableNameUserRole();
     }
 
-    static function createTable() {
+    static function init() {
         $tableName = static::tableName();
         $sql = "CREATE TABLE IF NOT EXISTS `$tableName` (
                   `urid` int(11) NOT NULL AUTO_INCREMENT COMMENT 'user role id',

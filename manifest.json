@@ -1,4 +1,10 @@
 {
     "name": "SimpleCMS",
-    "main": "Mod\\SimpleCMS\\ModuleSimpleCMS"
+    "main": "Mod\\SimpleCMS\\ModuleSimpleCMS",
+    "depends" : [
+        {
+            "name": "mod-simpleuser",
+            "git":  "http://github.com/dojet-modules/mod-simpleuser"
+        }
+    ]
 }

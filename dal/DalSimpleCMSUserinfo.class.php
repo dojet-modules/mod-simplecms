@@ -23,7 +23,7 @@ class DalSimpleCMSUserinfo extends BaseModuleDal {
         return static::module()->tableNameUserinfo();
     }
 
-    static function createTable() {
+    static function init() {
         $tableName = static::tableName();
         $sql = "CREATE TABLE IF NOT EXISTS `$tableName` (
                   `uid` int(11) NOT NULL COMMENT '用户id',
