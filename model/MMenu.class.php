@@ -7,6 +7,7 @@ namespace Mod\SimpleCMS;
 
 class MMenu {
 
+    protected $key;
     protected $title;
     protected $link;
     protected $permissions = array();
@@ -14,26 +15,42 @@ class MMenu {
 
     protected static $root;
 
-    function __construct($title, $link, $permissions) {
+    function __construct($id, $title, $link, $permissions) {
+        $this->id = $id;
         $this->title = $title;
         $this->link = $link;
         $this->permissions = $permissions;
     }
 
+    public static function menu($id, $title, $link = '', $permissions = array()) {
+        return new MMenu($id, $title, $link, $permissions);
+    }
+
     public static function root() {
-        if (self::$root not instanceof MMenu) {
-            $root = MMenu::menu(null);
+        if (!(self::$root instanceof MMenu)) {
+            self::$root = MMenu::menu('root', null);
         }
-        return $root;
+        return self::$root;
     }
 
-    public static function menu($title, $link = '', $permissions = array()) {
-        return new MMenu($title, $link, $permissions);
+    public static function setMenu(MMenu $submenu, $xpath = null) {
+        $node = self::root();
+
+        $key = strtok($xpath, '.');
+        while (false !== $key) {
+            $node = $node->submenu($key);
+            \DAssert::assert($node instanceof MMenu, 'menu xpath error, '.$xpath);
+            $key = strtok('.');
+        }
+        $node->addSubmenu($submenu);
     }
 
-    public function addSubmenu(MMenu $submenu) {
-        $this->submenu[] = $submenu;
-        return $this;
+    public function addSubmenu(MMenu $menu) {
+        $this->submenu[$menu->id()] = $menu;
+    }
+
+    public function id() {
+        return $this->id;
     }
 
     public function title() {
@@ -48,8 +65,23 @@ class MMenu {
         return $this->permissions;
     }
 
-    public function submenu() {
-        return $this->submenu;
+    public function submenu($id = null) {
+        if (is_null($id)) {
+            return $this->submenu;
+        }
+        return $this->submenu[$id];
+    }
+
+    public function toArray() {
+        $menu = array(
+                    'title' => $this->title,
+                    'link' => $this->link,
+                    'permissions' => $this->permissions,
+                );
+        foreach ($this->submenu() as $id => $submenu) {
+            $menu['submenu'][$id] = $submenu->toArray();
+        }
+        return $menu;
     }
 
 }

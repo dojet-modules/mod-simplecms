@@ -22,5 +22,9 @@ DAutoloader::getInstance()->addNamespacePathArray(__NAMESPACE__,
 Config::loadConfig(__DIR__.'/config/route');
 Config::loadConfig(__DIR__.'/config/permissions');
 
-// $menuAdmin = MMenu::menu('管理员管理', '/admin', array())
-// MMenu::root()->addSubmenu()
+$menuAdmin = MMenu::menu('admin', '管理员管理', '/admin', array());
+MMenu::setMenu($menuAdmin);
+MMenu::setMenu(MMenu::menu('role', '角色管理', '/role', array()));
+// $menuAdmin->addSubmenu(MMenu::menu('role', '角色管理', '/role', array()));
+// print_r(MMenu::root()->toArray());
+print_r(MMenu::root()->toArray());
