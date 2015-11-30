@@ -36,13 +36,29 @@ class MMenu {
     public static function setMenu(MMenu $submenu, $xpath = null) {
         $node = self::root();
 
-        $key = strtok($xpath, '.');
+        $key = strtok($xpath, '/');
         while (false !== $key) {
             $node = $node->submenu($key);
             \DAssert::assert($node instanceof MMenu, 'menu xpath error, '.$xpath);
             $key = strtok('.');
         }
         $node->addSubmenu($submenu);
+    }
+
+    public static function topMenu() {
+        $topMenu = array();
+        foreach (self::root()->submenu() as $id => $menu) {
+            $topMenu[$id] = $menu->toArray(false);
+        }
+        return $topMenu;
+    }
+
+    public static function leftMenu($topMenuId) {
+        $leftMenu = array();
+        foreach (self::root()->submenu($topMenuId)->submenu() as $id => $menu) {
+            $leftMenu[$id] = $menu->toArray();
+        }
+        return $leftMenu;
     }
 
     public function addSubmenu(MMenu $menu) {
@@ -72,14 +88,16 @@ class MMenu {
         return $this->submenu[$id];
     }
 
-    public function toArray() {
+    public function toArray($recursive = true) {
         $menu = array(
                     'title' => $this->title,
                     'link' => $this->link,
                     'permissions' => $this->permissions,
                 );
-        foreach ($this->submenu() as $id => $submenu) {
-            $menu['submenu'][$id] = $submenu->toArray();
+        if ($recursive) {
+            foreach ($this->submenu() as $id => $submenu) {
+                $menu['submenu'][$id] = $submenu->toArray();
+            }
         }
         return $menu;
     }

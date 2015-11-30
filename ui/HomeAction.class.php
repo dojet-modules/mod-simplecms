@@ -15,8 +15,8 @@ class HomeAction extends CMSPageBaseAction {
         $this->page = 'home/welcome.tpl.php';
     }
 
-    protected function topMenuKey() {
-
+    protected function topMenuId() {
+        return 'admin';
     }
 
 }

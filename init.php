@@ -8,7 +8,6 @@ require_once dirname(__FILE__).'/../mod-simpleuser/init.php';
 
 define('SIMPLE_CMS_UI', dirname(__FILE__).'/ui/');
 define('SIMPLE_CMS_TEMPLATE', dirname(__FILE__).'/template/');
-define('SIMPLE_CMS_CONFIG', dirname(__FILE__).'/config/');
 
 DAutoloader::getInstance()->addNamespacePathArray(__NAMESPACE__,
     array(
@@ -22,9 +21,12 @@ DAutoloader::getInstance()->addNamespacePathArray(__NAMESPACE__,
 Config::loadConfig(__DIR__.'/config/route');
 Config::loadConfig(__DIR__.'/config/permissions');
 
-$menuAdmin = MMenu::menu('admin', '管理员管理', '/admin', array());
-MMenu::setMenu($menuAdmin);
-MMenu::setMenu(MMenu::menu('role', '角色管理', '/role', array()));
-// $menuAdmin->addSubmenu(MMenu::menu('role', '角色管理', '/role', array()));
-// print_r(MMenu::root()->toArray());
-print_r(MMenu::root()->toArray());
+MMenu::setMenu(MMenu::menu('admin', '管理员管理', '/admin', array()));
+
+MMenu::setMenu(MMenu::menu('user', '用户管理'), 'admin');
+MMenu::setMenu(MMenu::menu('adduser', '添加用户', '/user/add', array()), 'admin/user');
+MMenu::setMenu(MMenu::menu('viewuser', '查看用户', '/user/view', array()), 'admin/user');
+
+MMenu::setMenu(MMenu::menu('role', '角色管理'), 'admin');
+MMenu::setMenu(MMenu::menu('addrole', '添加角色', '/role/add', array()), 'admin/role');
+MMenu::setMenu(MMenu::menu('viewrole', '查看角色', '/role/view', array()), 'admin/role');

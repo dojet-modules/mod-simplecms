@@ -41,12 +41,12 @@
           <ul class="nav navbar-nav">
           <? foreach ($tpl_top_menu as $key => $topMenu) : ?>
           <?php
-              $pms = $topMenu['pms'];
+              $pms = $topMenu['permissions'];
               if (!empty($pms) && !array_intersect($pms, $tpl_permissions)) continue;
               $link = $topMenu['link'];
               $title = $topMenu['title'];
           ?>
-            <li<?=$key == $tpl_menu_key ? ' class="active"' : ''?>><a href="<?=$link?>"><?=safeHtml($title)?></a></li>
+            <li<?=$key == $tpl_menu_id ? ' class="active"' : ''?>><a href="<?=$link?>"><?=safeHtml($title)?></a></li>
           <? endforeach ?>
           </ul>
         </div><!--/.navbar-collapse -->
@@ -57,12 +57,13 @@
       <div class="row">
         <div class="col-xs-2">
           <div class="well nav-side">
+            <? print_r($tpl_left_menu); ?>
             <? foreach ((array)$tpl_left_menu as $menu) : ?>
-            <?  if (!array_intersect($menu['pms'], $tpl_permissions)) continue; ?>
+            <?  if (!array_intersect($menu['permissions'], $tpl_permissions)) continue; ?>
               <dl class="nav">
                 <dt><?=safeHtml($menu['title'])?></dt>
                 <? foreach ($menu['link'] as $item) : ?>
-                <?  if (!array_intersect($item['pms'], $tpl_permissions)) {continue;} ?>
+                <?  if (!array_intersect($item['permissions'], $tpl_permissions)) {continue;} ?>
                   <dd><a href="<?=$item['link']?>"><?=safeHtml($item['title'])?></a></dd>
                 <? endforeach ?>
               </dl>

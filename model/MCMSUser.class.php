@@ -58,6 +58,10 @@ class MCMSUser {
         return $userinfo['fullname'];
     }
 
+    public function getPermissions() {
+        return array();
+    }
+
     public function signout() {
         $this->simpleUser->signout();
     }
