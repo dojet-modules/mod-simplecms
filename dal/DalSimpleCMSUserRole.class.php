@@ -41,7 +41,7 @@ class DalSimpleCMSUserRole extends BaseModuleDal {
         $sql = "SELECT rid
                 FROM `$tableName`
                 WHERE uid=$uid";
-        return self::rs2firstvalue($sql);
+        return self::rs2value($sql);
     }
 
 }
