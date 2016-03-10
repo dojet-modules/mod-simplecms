@@ -4,7 +4,7 @@ namespace Mod\SimpleCMS;
 use \DAutoloader;
 use \Config;
 
-require_once dirname(__FILE__).'/../mod-simpleuser/init.php';
+\Dojet::addModule(__DIR__.'/../mod-simpleuser');
 
 define('SIMPLE_CMS_UI', dirname(__FILE__).'/ui/');
 define('SIMPLE_CMS_TEMPLATE', dirname(__FILE__).'/template/');

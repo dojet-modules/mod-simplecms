@@ -1,5 +1,5 @@
 <?php
-use \Dispatcher;
+// use \Dispatcher;
 
 Dispatcher::route('/^$/', SIMPLE_CMS_UI.'HomeAction', 'Mod\\SimpleCMS\\');
 Dispatcher::route('/^signin$/', SIMPLE_CMS_UI.'sign/SigninAction', 'Mod\\SimpleCMS\\');
