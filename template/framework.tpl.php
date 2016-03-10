@@ -57,13 +57,12 @@
       <div class="row">
         <div class="col-xs-2">
           <div class="well nav-side">
-            <? print_r($tpl_left_menu); ?>
             <? foreach ((array)$tpl_left_menu as $menu) : ?>
-            <?  if (!array_intersect($menu['permissions'], $tpl_permissions)) continue; ?>
+            <?  if (!array_intersect($menu['permissions'], $tpl_permissions) && !empty($menu['permissions'])) continue; ?>
               <dl class="nav">
                 <dt><?=safeHtml($menu['title'])?></dt>
-                <? foreach ($menu['link'] as $item) : ?>
-                <?  if (!array_intersect($item['permissions'], $tpl_permissions)) {continue;} ?>
+                <? foreach ($menu['submenu'] as $item) : ?>
+                <?  if (!array_intersect($item['permissions'], $tpl_permissions) && !empty($item['permissions'])) {continue;} ?>
                   <dd><a href="<?=$item['link']?>"><?=safeHtml($item['title'])?></a></dd>
                 <? endforeach ?>
               </dl>
