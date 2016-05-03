@@ -5,4 +5,4 @@
         alias [xxx]/mod-simplecms/static/
     }
 
-依赖模块: ModuleSimpleUser
+依赖模块: ModuleSimpleUser(mod-simpleuser)
