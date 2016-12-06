@@ -8,6 +8,11 @@
  * @author liyan
  * @since 2015 7 21
  */
+namespace Mod\SimpleCMS;
+
+use \BaseModuleDal;
+use \DAssert;
+
 class DalSimpleCMSRole extends BaseModuleDal {
 
     static function module() {
@@ -18,18 +23,20 @@ class DalSimpleCMSRole extends BaseModuleDal {
         return static::module()->tableNameRole();
     }
 
-    static function createTable() {
+    static function init() {
         $tableName = static::tableName();
         $sql = "CREATE TABLE IF NOT EXISTS `$tableName` (
                   `rid` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'role id',
-                  `role_name` varchar(32) NOT NULL COMMENT 'role name',
+                  `rolename` varchar(32) NOT NULL COMMENT '角色名称',
+                  `pids` text NOT NULL COMMENT '权限集',
+                  `createtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
                   PRIMARY KEY (`rid`),
-                  UNIQUE KEY `role_name` (`role_name`)
-                ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='cms role';";
+                  UNIQUE KEY `rolename` (`rolename`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='CMS角色';";
         return self::doCreateTable($sql);
     }
 
-    public static function getRoles($ps, $pn) {
+    public static function getRoles($ps = 0, $pn = 0xffffffff) {
         $tableName = static::tableName();
         DAssert::assertNumeric($ps);
         DAssert::assertNumeric($pn);
@@ -39,5 +46,12 @@ class DalSimpleCMSRole extends BaseModuleDal {
         return self::rs2array($sql);
     }
 
+    public static function addRole($rolename, $pids) {
+        $arrIns = array(
+            'rolename' => $rolename,
+            'pids' => $pids,
+        );
+        return self::doInsert(static::tableName(), $arrIns);
+    }
 
 }

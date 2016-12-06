@@ -20,6 +20,7 @@ implements IDatabaseModule {
     protected $tableNameUserinfo = 'simple_cms_userinfo';
     protected $tableNameUserRole = 'simple_cms_user_role';
     protected $tableNameUserPermission = 'simple_cms_user_permission';
+    protected $tableNameRolePermission = 'simple_cms_role_permission';
 
     public function database() {
         return $this->database;
@@ -67,6 +68,16 @@ implements IDatabaseModule {
 
     public function setTableNameUserinfo($tableName) {
         $this->tableNameUserinfo = $tableName;
+        return $this;
+    }
+
+    public function tableNameRolePermission() {
+        DAssert::assert(!empty($this->tableNameRolePermission), 'tableNameRolePermission should not be empty');
+        return $this->tableNameRolePermission;
+    }
+
+    public function setTableNameRoleinfo($tableName) {
+        $this->tableNameRoleinfo = $tableName;
         return $this;
     }
 

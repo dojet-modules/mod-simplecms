@@ -47,7 +47,7 @@ abstract class CMSBaseAction extends XBaseAction {
             return true;
         }
 
-        $arrRolePms = $this->getRolePermissions($rid);
+        $arrRolePms = $this->getRolePermissions($roleId);
         foreach ($arrRolePms as $rolePms) {
             if (in_array($rolePms, $arrPagePms)) {
                 return true;

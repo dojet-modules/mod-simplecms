@@ -24,9 +24,9 @@ Config::loadConfig(__DIR__.'/config/permissions');
 MMenu::setMenu(MMenu::menu('admin', '管理员管理', '/admin', array()));
 
 MMenu::setMenu(MMenu::menu('user', '用户管理'), 'admin');
+MMenu::setMenu(MMenu::menu('listuser', '查看用户', '/user/list', array()), 'admin/user');
 MMenu::setMenu(MMenu::menu('adduser', '添加用户', '/user/add', array()), 'admin/user');
-MMenu::setMenu(MMenu::menu('viewuser', '查看用户', '/user/view', array()), 'admin/user');
 
 MMenu::setMenu(MMenu::menu('role', '角色管理'), 'admin');
+MMenu::setMenu(MMenu::menu('listrole', '查看角色', '/role/list', array()), 'admin/role');
 MMenu::setMenu(MMenu::menu('addrole', '添加角色', '/role/add', array()), 'admin/role');
-MMenu::setMenu(MMenu::menu('viewrole', '查看角色', '/role/view', array()), 'admin/role');

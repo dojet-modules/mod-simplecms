@@ -13,8 +13,8 @@ use \Config;
 
 abstract class CMSPageBaseAction extends CMSBaseAction {
 
-    protected $title;
-    protected $page;
+    protected $title = '无标题';
+    protected $page = 'blank.tpl.php';
 
     abstract protected function cmsPageAction(MCMSUser $user);
     abstract protected function topMenuId();
@@ -41,7 +41,8 @@ abstract class CMSPageBaseAction extends CMSBaseAction {
     }
 
     protected function permissionDenied(MCMSUser $user) {
-        $this->page = 'permissiondeny.tpl.php';
+        $this->title = '访问失败';
+        $this->page = 'home/permissiondenied.tpl.php';
         $this->displayPage($user);
     }
 

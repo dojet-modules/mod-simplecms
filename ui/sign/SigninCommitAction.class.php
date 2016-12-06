@@ -19,11 +19,7 @@ class SigninCommitAction extends XBaseAction {
         $username = MRequest::post('username');
         $password = MRequest::post('password');
 
-        $md5password = MSimpleUser::md5password($password);
-
-        MSimpleUser::userFromUsernamePassword($username, $md5password);
-
-        LibSimpleUser::persistentAuth($username, $md5password);
+        MSimpleUser::signin($username, $password);
 
         $redirect = MCookie::getCookie('signin_redirect');
         MCookie::removeCookie('signin_redirect');

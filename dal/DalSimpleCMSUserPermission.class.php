@@ -18,9 +18,9 @@ class DalSimpleCMSUserPermission extends BaseModuleDal {
         return static::module()->tableNameUserPermission();
     }
 
-    static function createTable() {
+    static function init() {
         $tableName = static::tableName();
-        $sql = "CREATE TABLE IF NOT EXISTS `simple_cms_user_permission` (
+        $sql = "CREATE TABLE IF NOT EXISTS `$tableName` (
                   `upid` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
                   `uid` int(10) unsigned NOT NULL COMMENT 'user id',
                   `pmid` int(10) unsigned NOT NULL COMMENT 'permission id',
