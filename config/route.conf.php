@@ -10,4 +10,5 @@ Dispatcher::route('/^user\/add$/', SIMPLE_CMS_UI.'user/UserAddAction', 'Mod\\Sim
 
 Dispatcher::route('/^role\/list$/', SIMPLE_CMS_UI.'role/RoleListAction', 'Mod\\SimpleCMS\\');
 Dispatcher::route('/^role\/add$/', SIMPLE_CMS_UI.'role/RoleAddAction', 'Mod\\SimpleCMS\\');
-Dispatcher::route('/^role\/add\/commit$/', SIMPLE_CMS_UI.'role/RoleAddCommitAction', 'Mod\\SimpleCMS\\');
+Dispatcher::route('/^role\/edit\/(?<rid>[^\/]*)$/', SIMPLE_CMS_UI.'role/RoleEditAction', 'Mod\\SimpleCMS\\');
+Dispatcher::route('/^role\/commit$/', SIMPLE_CMS_UI.'role/RoleCommitAction', 'Mod\\SimpleCMS\\');

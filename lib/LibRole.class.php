@@ -11,6 +11,12 @@ namespace Mod\SimpleCMS;
 
 class LibRole {
 
+    public static function getRole($rid) {
+        $role = DalSimpleCMSRole::getRole($rid);
+        $role['pids'] = json_decode($role['pids'], true);
+        return $role;
+    }
+
     public static function addRolePermission($rolename, $pms) {
         DalSimpleCMSRole::beginTransaction();
         try {

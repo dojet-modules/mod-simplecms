@@ -37,13 +37,22 @@ class DalSimpleCMSRole extends BaseModuleDal {
     }
 
     public static function getRoles($ps = 0, $pn = 0xffffffff) {
-        $tableName = static::tableName();
         DAssert::assertNumeric($ps);
         DAssert::assertNumeric($pn);
+        $tableName = static::tableName();
         $sql = "SELECT *
                 FROM `$tableName`
                 LIMIT $ps, $pn";
         return self::rs2array($sql);
+    }
+
+    public static function getRole($rid) {
+        DAssert::assertNumeric($rid);
+        $tableName = static::tableName();
+        $sql = "SELECT *
+                FROM $tableName
+                WHERE rid=$rid";
+        return self::rs2rowline($sql);
     }
 
     public static function addRole($rolename, $pids) {
@@ -52,6 +61,16 @@ class DalSimpleCMSRole extends BaseModuleDal {
             'pids' => $pids,
         );
         return self::doInsert(static::tableName(), $arrIns);
+    }
+
+    public static function updateRole($rid, $rolename, $pids) {
+        DAssert::assertNumeric($rid);
+        $arrUpd = array(
+            'rolename' => $rolename,
+            'pids' => $pids,
+        );
+        $where = "rid=$rid";
+        return self::doUpdate(static::tableName(), $arrUpd, $where, 1);
     }
 
 }

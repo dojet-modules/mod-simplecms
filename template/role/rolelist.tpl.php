@@ -7,31 +7,20 @@
 <table class="table table-hover">
   <thead>
     <tr>
-      <th>ID</th>
+      <th class='col-xs-1'>ID</th>
       <th>角色名称</th>
+      <th class="col-xs-2">操作</th>
     </tr>
   </thead>
   <tbody>
 <?php foreach ($tpl_roles as $role) : ?>
     <tr>
-      <td class='col-xs-1'><?php echo $role['rid']; ?></td>
+      <td><?php echo $role['rid']; ?></td>
       <td><?php echo safeHtml($role['rolename']); ?></td>
+      <td>
+        <a href="/role/edit/<?=$role['rid']?>" class="btn btn-success">编辑</a>
+      </td>
     </tr>
 <?php endforeach ?>
   </tbody>
 </table>
-
-<style>
-.tr-line .btn-hide { display:none;}
-.tr-line:hover .btn-hide { display:inline;}
-</style>
-
-<script type="text/javascript">
-$().ready(function() {
-  $('a[role=delete]').click(function() {
-    if (!confirm('确定删除吗？')) {
-      return false;
-    }
-  });
-});
-</script>
