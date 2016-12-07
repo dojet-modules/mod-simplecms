@@ -32,6 +32,7 @@ class DalSimpleCMSUserinfo extends BaseModuleDal {
                   `email` varchar(64) NOT NULL COMMENT 'Email',
                   `tel` varchar(16) NOT NULL COMMENT '电话',
                   `recruit` BOOLEAN DEFAULT 1 COMMENT '是否新用户',
+                  `rid` int(10) unsigned NOT NULL DEFAULT 0 COMMENT '角色ID',
                   PRIMARY KEY (`uid`)
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='SimpleCMS用户信息';";
         return self::doCreateTable($sql);

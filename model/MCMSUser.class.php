@@ -13,7 +13,6 @@ class MCMSUser {
     protected static $me;
 
     private $userinfo;
-    private $roleID;
 
     function __construct(MSimpleUser $simpleUser) {
         $this->simpleUser = $simpleUser;
@@ -47,10 +46,8 @@ class MCMSUser {
     }
 
     public function roleID() {
-        if (!$this->roleID) {
-            $this->roleID = DalSimpleCMSUserRole::getUserRoleID($this->uid());
-        }
-        return $this->roleID;
+        $userinfo = $this->getUserinfo();
+        return $userinfo['rid'];
     }
 
     public function getFullname() {

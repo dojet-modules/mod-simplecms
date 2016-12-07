@@ -33,7 +33,10 @@ class DalSimpleCMSRole extends BaseModuleDal {
                   PRIMARY KEY (`rid`),
                   UNIQUE KEY `rolename` (`rolename`)
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='CMS角色';";
-        return self::doCreateTable($sql);
+        self::doCreateTable($sql);
+        $admin_pms = array_keys(\Config::configForKeyPath('permission'));
+        self::doInsert($tableName, array('rolename' => '管理员', 'pids' => json_encode($admin_pms)));
+        self::doInsert($tableName, array('rolename' => '普通用户', 'pids' => '[]',));
     }
 
     public static function getRoles($ps = 0, $pn = 0xffffffff) {

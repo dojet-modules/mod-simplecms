@@ -20,7 +20,7 @@ $__c = array(
     PMS_ROLE_DEL => '删除角色',
     PMS_ROLE_VIEW => '浏览角色',
 
-    PMS_LOG_VIEW => '查看日志',
+    // PMS_LOG_VIEW => '查看日志',
 );
 
 unset($__c);
