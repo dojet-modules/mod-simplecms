@@ -2,25 +2,24 @@
 /**
  * Homepage
  *
- * Filename: UserAddAction.class.php
+ * Filename: UserListAction.class.php
  *
  * @author liyan
- * @since 2016 12 8
+ * @since 2016 12 5
  */
 namespace Mod\SimpleCMS;
 
-class UserAddAction extends CMSPageBaseAction {
+class UserListAction extends CMSPageBaseAction {
 
     protected function templatePrefix($template) {
         return SIMPLE_CMS_TEMPLATE;
     }
 
     protected function cmsPageAction(MCMSUser $user) {
-        $pms = \Config::configForKeyPath('permission');
-        $roles = DalSimpleCMSRole::getRoles();
-        $this->assign('roles', $roles);
-        $this->title = '添加用户';
-        $this->page = 'user/useradd.tpl.php';
+        $userlist = DalSimpleCMSUserinfo::getUserList();
+        $this->assign('userlist', $userlist);
+        $this->title = '查看用户';
+        $this->page = 'user/userlist.tpl.php';
     }
 
     protected function topMenuId() {

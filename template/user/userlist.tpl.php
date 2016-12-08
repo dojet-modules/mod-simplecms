@@ -14,9 +14,10 @@
     </tr>
   </thead>
   <tbody>
-<?php foreach ($tpl_users as $user) : ?>
+<?php foreach ($tpl_userlist as $user) : ?>
     <tr>
       <td><?php echo $user['rid']; ?></td>
+      <td><?php echo safeHtml($user['username']); ?></td>
       <td><?php echo safeHtml($user['username']); ?></td>
       <td>
         <a href="/user/edit/<?=$user['rid']?>" class="btn btn-success">编辑</a>

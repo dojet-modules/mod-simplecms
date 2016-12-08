@@ -47,4 +47,14 @@ class DalSimpleCMSUserinfo extends BaseModuleDal {
         return self::rs2rowline($sql);
     }
 
+    public static function getUserList($ps = 0, $pn = 0xffffffff) {
+        DAssert::assertNumeric($ps);
+        DAssert::assertNumeric($pn);
+        $tableName = self::tableName();
+        $sql = "SELECT *
+                FROM $tableName
+                LIMIT $ps, $pn";
+        return self::rs2array($sql);
+    }
+
 }

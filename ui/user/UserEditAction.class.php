@@ -2,14 +2,14 @@
 /**
  * Homepage
  *
- * Filename: UserAddAction.class.php
+ * Filename: RoleEditAction.class.php
  *
  * @author liyan
- * @since 2016 12 8
+ * @since 2016 12 5
  */
 namespace Mod\SimpleCMS;
 
-class UserAddAction extends CMSPageBaseAction {
+class RoleEditAction extends CMSPageBaseAction {
 
     protected function templatePrefix($template) {
         return SIMPLE_CMS_TEMPLATE;
@@ -17,10 +17,12 @@ class UserAddAction extends CMSPageBaseAction {
 
     protected function cmsPageAction(MCMSUser $user) {
         $pms = \Config::configForKeyPath('permission');
-        $roles = DalSimpleCMSRole::getRoles();
-        $this->assign('roles', $roles);
-        $this->title = '添加用户';
-        $this->page = 'user/useradd.tpl.php';
+        $rid = \MRequest::param('rid');
+        $role = LibRole::getRole($rid);
+        $this->assign('role', $role);
+        $this->assign('pms', $pms);
+        $this->title = '编辑角色';
+        $this->page = 'role/roleadd.tpl.php';
     }
 
     protected function topMenuId() {
