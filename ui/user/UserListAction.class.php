@@ -17,6 +17,8 @@ class UserListAction extends CMSPageBaseAction {
 
     protected function cmsPageAction(MCMSUser $user) {
         $userlist = DalSimpleCMSUserinfo::getUserList();
+        $roles = DalSimpleCMSRole::getRoles();
+        $this->assign('roles', $roles);
         $this->assign('userlist', $userlist);
         $this->title = '查看用户';
         $this->page = 'user/userlist.tpl.php';

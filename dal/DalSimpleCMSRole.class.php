@@ -46,7 +46,7 @@ class DalSimpleCMSRole extends BaseModuleDal {
         $sql = "SELECT *
                 FROM `$tableName`
                 LIMIT $ps, $pn";
-        return self::rs2array($sql);
+        return self::rs2keyarray($sql, 'rid');
     }
 
     public static function getRole($rid) {

@@ -2,7 +2,7 @@
 /**
  * Homepage
  *
- * Filename: RoleCommitAction.class.php
+ * Filename: UserCommitAction.class.php
  *
  * @author liyan
  * @since 2016 12 5
@@ -11,22 +11,29 @@ namespace Mod\SimpleCMS;
 
 use \MRequest;
 use \DAssert;
+use Mod\SimpleUser\LibSimpleUser;
+use Mod\SimpleUser\DalSimpleUser;
 
-class RoleCommitAction extends CMSBaseAction {
+class UserCommitAction extends CMSBaseAction {
 
     protected function cmsAction(MCMSUser $user) {
+        $uid = MRequest::post('uid');
+        $username = MRequest::post('username');
+        $password = MRequest::post('password');
+        $fullname = MRequest::post('fullname');
+        $gender = MRequest::post('gender');
+        $email = MRequest::post('email');
+        $tel = MRequest::post('tel');
         $rid = MRequest::post('rid');
-        $pids = MRequest::post('pids');
-        $rolename = MRequest::post('rolename');
-        DAssert::assertArray($pids, 'illegal permissions');
-        if ($rid) {
+        if ($uid) {
             // edit
-            DalSimpleCMSRole::updateRole($rid, $rolename, json_encode($pids));
         } else {
             // add
-            DalSimpleCMSRole::addRole($rolename, json_encode($pids));
+            LibSimpleUser::addUser($username, $password);
+            $uid = DalSimpleUser::insertID();
         }
-        redirect('/role/list');
+        DalSimpleCMSUserinfo::setUserinfo($uid, $fullname, $gender, $email, $tel, $rid);
+        redirect('/user/list');
     }
 
     protected function pagePermissions() {

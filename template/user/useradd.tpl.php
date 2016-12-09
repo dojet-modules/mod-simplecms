@@ -3,7 +3,7 @@
 // $rid = isset($tpl_role) ? $tpl_role['rid'] : '';
 // $pids = isset($tpl_role) ? $tpl_role['pids'] : array();
 ?>
-<form class="form-horizontal" role="form" action="/role/commit" method="post">
+<form class="form-horizontal" role="form" action="/user/commit" method="post">
   <input type="hidden" name="rid" value="<?php echo safeHtml($rid); ?>" />
   <div class="form-group">
     <label for="username" class="col-sm-2 control-label">用户名</label>
