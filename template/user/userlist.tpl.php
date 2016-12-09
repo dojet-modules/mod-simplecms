@@ -24,7 +24,7 @@
       <td><?php echo safeHtml($user['email']); ?></td>
       <td><?php echo safeHtml($user['tel']); ?></td>
       <td>
-        <a href="/user/edit/<?=$user['rid']?>" class="btn btn-success">编辑</a>
+        <a href="/user/edit/<?=$user['uid']?>" class="btn btn-success">编辑</a>
       </td>
     </tr>
 <?php endforeach ?>

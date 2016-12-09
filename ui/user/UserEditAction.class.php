@@ -2,27 +2,31 @@
 /**
  * Homepage
  *
- * Filename: RoleEditAction.class.php
+ * Filename: UserEditAction.class.php
  *
  * @author liyan
  * @since 2016 12 5
  */
 namespace Mod\SimpleCMS;
 
-class RoleEditAction extends CMSPageBaseAction {
+use Mod\SimpleUser\DalSimpleUser;
+
+class UserEditAction extends CMSPageBaseAction {
 
     protected function templatePrefix($template) {
         return SIMPLE_CMS_TEMPLATE;
     }
 
     protected function cmsPageAction(MCMSUser $user) {
-        $pms = \Config::configForKeyPath('permission');
-        $rid = \MRequest::param('rid');
-        $role = LibRole::getRole($rid);
-        $this->assign('role', $role);
-        $this->assign('pms', $pms);
-        $this->title = '编辑角色';
-        $this->page = 'role/roleadd.tpl.php';
+        $uid = \MRequest::param('uid');
+        $simpleUser = DalSimpleUser::getUser($uid);
+        $userinfo = DalSimpleCMSUserinfo::getUserinfo($uid);
+        $roles = DalSimpleCMSRole::getRoles();
+        $this->assign('simpleUser', $simpleUser);
+        $this->assign('userinfo', $userinfo);
+        $this->assign('roles', $roles);
+        $this->title = '编辑用户信息';
+        $this->page = 'user/useradd.tpl.php';
     }
 
     protected function topMenuId() {
