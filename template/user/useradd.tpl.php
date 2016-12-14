@@ -1,7 +1,7 @@
 <?php
 $isEdit = isset($tpl_simpleUser);
 ?>
-<form class="form-horizontal" role="form" action="/user/commit" method="post">
+<form class="form-horizontal" id="form-user" role="form" action="/user/commit" method="post">
   <input type="hidden" name="uid" value="<?php echo $isEdit ? $tpl_simpleUser['uid'] : ''; ?>" />
   <div class="form-group">
     <label for="username" class="col-sm-2 control-label">用户名</label>
@@ -17,13 +17,13 @@ $isEdit = isset($tpl_simpleUser);
   <div class="form-group">
     <label for="password" class="col-sm-2 control-label">密码</label>
     <div class="col-sm-4">
-      <input type="text" class="form-control" id="password" name="password" placeholder="登录密码" />
+      <input type="password" class="form-control" id="password" name="password" placeholder="登录密码" />
     </div>
   </div>
   <div class="form-group">
     <label for="pwd" class="col-sm-2 control-label">确认密码</label>
     <div class="col-sm-4">
-      <input type="text" class="form-control" id="pwd" placeholder="确认2次输入密码一致">
+      <input type="password" class="form-control" id="pwd" placeholder="确认2次输入密码一致">
     </div>
   </div>
 <?php endif ?>
@@ -89,3 +89,14 @@ $isEdit = isset($tpl_simpleUser);
     </div>
   </div>
 </form>
+<script type="text/javascript">
+$().ready(function() {
+  $('#form-user').submit(function() {
+    if ($('input[name=password]').val() != $('input[name=pwd]').val()) {
+      alert('密码不匹配');
+      $('input[name=password]').focus();
+      return false;
+    }
+  });
+});
+</script>
